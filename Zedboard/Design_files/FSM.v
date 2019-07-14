@@ -65,69 +65,50 @@ module FSM(
      case(state)
         st0: begin
                 stateop <= 4'hf; 
-               
-        end
+             end
         st1: begin
-                stateop <= 4'h1;   
-               
-              end
+                stateop <= 4'h1;    
+             end
         st2: begin
-                stateop <= 4'h2;
-                
+                stateop <= 4'h2;         
              end
         st3: begin
-                stateop<= 4'h3;
-               
-            end
-        st4:begin
-                stateop <= 4'h4;
-               
-            end
-        st5:begin
-             
-                stateop <= 4'h5; 
-          
-                
+                stateop<= 4'h3; 
              end
-        st6:begin
-                stateop <= 4'h6;
-              
-                
-            end
-        
-        st7:begin 
-                stateop<= 4'h7;
-                
-         end
+        st4: begin
+                stateop <= 4'h4;            
+             end
+        st5: begin        
+                stateop <= 4'h5;                    
+             end
+        st6: begin
+                stateop <= 4'h6;            
+             end
+        st7: begin 
+                stateop<= 4'h7;              
+             end
          
-         st8: begin
-         stateop<=4'h8;
-         end
-         st9: begin
-         stateop<=4'h9;
-         end
-         st10: begin
-         stateop<=4'hA;
-         end
-         st11:begin
-         stateop<=4'hb;
-         end
-         st12: begin
-         stateop <= 4'hc;
-         end
-        default:begin
-                //rdaddr<=8'h01;
-               // we<=0;
-                //wren<=0;
-               
-                stateop<=0;
-               // rden <= 1;
-               // wraddr <= 0;
-               // data = 0;
-            end
+        st8: begin
+                stateop<=4'h8;
+             end
+        st9: begin
+                stateop<=4'h9;
+             end
+        st10: begin
+               stateop<=4'hA;
+              end
+        st11: begin
+               stateop<=4'hb;
+              end
+        st12: begin
+               stateop <= 4'hc;
+              end
+        default: begin            
+                   stateop<=0;
+                 end
 
       endcase
-end
+   end
 
    
    
@@ -145,7 +126,6 @@ end
                 ten<=0;
                 we<=0;
                 wren<=0;
-              //  wraddr<=0;
             end
             else
             begin
@@ -296,12 +276,12 @@ end
                 wren<=0;
               end  
           st10:begin
-          next_state<=st11;
-          rden<=1;
-          ten<=0;
-           we<=0;
-         wren<=0;
-            end
+                next_state<=st11;
+                rden<=1;
+                ten<=0;
+                we<=0;
+                wren<=0;
+               end
           st11: 
           begin
           if(current_count==count)
@@ -309,7 +289,7 @@ end
                 rden<=0;
                 ten<=0;
                  we<=0;
-               wren<=0;
+                wren<=0;
                 next_state<=st0;
           end
           else
@@ -331,9 +311,7 @@ end
            //wraddr<=0;
          end        
      endcase
-
-     
-    end
+   end
 
 always @ (posedge clk)
 begin
@@ -378,8 +356,8 @@ case(state)
        
         st8:
         begin
-        count[15:8]<=rreg;
-        current_count<=0;
+          count[15:8]<=rreg;
+          current_count<=0;
              //rdaddr<=rdaddr>>1;
         end
         
@@ -390,18 +368,20 @@ case(state)
           current_count <= 0;         
         end
         
-        st10:begin
-        rdaddr<=rdaddr+1;
+        st10:
+         begin
+          rdaddr<=rdaddr+1;
          end
         st11:
         begin
-        rdaddr<=rdaddr+1;
-        current_count<=current_count+1;
+          rdaddr<=rdaddr+1;
+          current_count<=current_count+1;
         end
          default: 
          begin
            wraddr<=0;
            rdaddr<=0;
+           current_count<=0;
          end        
      endcase
 end
